@@ -297,6 +297,7 @@ PY_CONVERT(MPVariable);
 %rename (Constraint) operations_research::MPSolver::MakeRowConstraint(const std::string&);
 %unignore operations_research::MPSolver::~MPSolver;
 %unignore operations_research::MPSolver::Solve;
+%unignore operations_research::MPSolver::ComputeIIS;
 %unignore operations_research::MPSolver::VerifySolution;
 %unignore operations_research::MPSolver::infinity;
 %unignore operations_research::MPSolver::set_time_limit;  // No unit test

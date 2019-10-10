@@ -56,6 +56,7 @@ class BopInterface : public MPSolverInterface {
 
   // ----- Solve -----
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
+  int ComputeIIS(const std::string& filename) override;
 
   // ----- Model modifications and extraction -----
   void Reset() override;
@@ -126,6 +127,10 @@ BopInterface::BopInterface(MPSolver* const solver)
       interrupt_solver_(false) {}
 
 BopInterface::~BopInterface() {}
+
+int BopInterface::ComputeIIS(const std::string& filename) {
+	return 0;
+}
 
 MPSolver::ResultStatus BopInterface::Solve(const MPSolverParameters& param) {
   // Check whenever the solve has already been stopped by the user.

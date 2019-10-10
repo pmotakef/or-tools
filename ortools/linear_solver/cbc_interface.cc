@@ -64,6 +64,7 @@ class CBCInterface : public MPSolverInterface {
   // ----- Solve -----
   // Solve the problem using the parameter values specified.
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
+  int ComputeIIS(const std::string& filename) override;
 
   // TODO(user): separate the solve from the model extraction.
   virtual void ExtractModel() {}
@@ -240,6 +241,10 @@ void CBCInterface::AddRowConstraint(MPConstraint* const ct) {
 
 void CBCInterface::AddVariable(MPVariable* const var) {
   sync_status_ = MUST_RELOAD;
+}
+
+int CBCInterface::ComputeIIS(const std::string& filename) {
+	return 0;
 }
 
 // Solve the LP/MIP. Returns true only if the optimal solution was revealed.

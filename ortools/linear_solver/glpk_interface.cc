@@ -102,6 +102,7 @@ class GLPKInterface : public MPSolverInterface {
   // ----- Solve -----
   // Solve the problem using the parameter values specified.
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
+  int ComputeIIS(const std::string& filename) override;
 
   // ----- Model modifications and extraction -----
   // Resets extracted model
@@ -512,6 +513,10 @@ void GLPKInterface::ExtractObjective() {
   }
   // Constant term.
   glp_set_obj_coef(lp_, 0, solver_->Objective().offset());
+}
+
+int GLPKInterface::ComputeIIS(const std::string& filename) {
+	return 0;
 }
 
 // Solve the problem using the parameter values specified.

@@ -28,6 +28,17 @@ util::Status LoadGurobiEnvironment(GRBenv** env) {
       "Could not load Gurobi environment. Is gurobi correctly installed and "
       "licensed on this machine?";
 
+  const char* isv_org = getenv("GUROBI_REGISTERED_ORG");
+  if (isv_org != NULL && isv_org[0] != '\0') {
+	  const char* isv_app = getenv("GUROBI_AUTHORIZED_APP");
+	  const char* isv_date = getenv("GUROBI_EXPIRE_DATE");
+	  const char* isv_lic = getenv("GUROBI_LIC_KEY");
+	  int error = GRBisqp(env, nullptr, isv_org, isv_app, atoi(isv_date), isv_lic);
+	  if (error == 0 && *env != nullptr) {
+		  return util::OkStatus();
+	  }
+  }
+  
   if (GRBloadenv(env, nullptr) != 0 || *env == nullptr) {
     return util::FailedPreconditionError(
         absl::StrFormat("%s %s", kGurobiEnvErrorMsg, GRBgeterrormsg(*env)));

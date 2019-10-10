@@ -51,6 +51,8 @@ class GurobiInterface : public MPSolverInterface {
   // ----- Solve -----
   // Solves the problem using the parameter values specified.
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
+  int ComputeIIS(const std::string& filename) override;
+
   absl::optional<MPSolutionResponse> DirectlySolveProto(
       const MPModelRequest& request) override;
 
@@ -674,6 +676,15 @@ int GurobiInterface::SolutionCount() const {
   CheckedGurobiCall(
       GRBgetintattr(model_, GRB_INT_ATTR_SOLCOUNT, &solution_count));
   return solution_count;
+}
+
+int GurobiInterface::ComputeIIS(const std::string& filename) {
+	const int error = GRBcomputeIIS(model_);
+	if (error) {
+		return (error);
+	}
+	const int status = GRBwrite(model_, filename.c_str());
+	return status;
 }
 
 MPSolver::ResultStatus GurobiInterface::Solve(const MPSolverParameters& param) {

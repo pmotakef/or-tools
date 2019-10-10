@@ -70,6 +70,7 @@ class CplexInterface : public MPSolverInterface {
   // ----- Solve -----
   // Solve the problem using the parameter values specified.
   virtual MPSolver::ResultStatus Solve(MPSolverParameters const &param);
+  int ComputeIIS(const std::string& filename) override;
 
   // ----- Model modifications and extraction -----
   // Resets extracted model
@@ -1091,6 +1092,10 @@ bool CplexInterface::ReadParameterFile(std::string const &filename) {
 
 std::string CplexInterface::ValidFileExtensionForParameterFile() const {
   return ".prm";
+}
+
+int CplexInterface::ComputeIIS(const std::string& filename) {
+	return 0;
 }
 
 MPSolver::ResultStatus CplexInterface::Solve(MPSolverParameters const &param) {

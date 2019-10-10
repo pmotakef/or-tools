@@ -51,6 +51,7 @@ class CLPInterface : public MPSolverInterface {
   // ----- Solve -----
   // Solve the problem using the parameter values specified.
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
+  int ComputeIIS(const std::string& filename) override;
 
   // ----- Model modifications and extraction -----
   // Resets extracted model
@@ -399,6 +400,10 @@ void CLPInterface::ExtractObjective() {
   // Constant term. Use -offset instead of +offset because CLP does
   // not follow conventions.
   clp_->setObjectiveOffset(-solver_->Objective().offset());
+}
+
+int CLPInterface::ComputeIIS(const std::string& filename) {
+	return 0;
 }
 
 // Extracts model and solve the LP/MIP. Returns the status of the search.

@@ -1138,6 +1138,10 @@ MPSolver::ResultStatus MPSolver::Solve(const MPSolverParameters& param) {
   return status;
 }
 
+int MPSolver::ComputeIIS(const std::string& filename) {
+  return interface_->ComputeIIS(filename);
+}
+
 void MPSolver::Write(const std::string& file_name) {
   interface_->Write(file_name);
 }

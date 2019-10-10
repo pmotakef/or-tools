@@ -39,6 +39,7 @@ class GLOPInterface : public MPSolverInterface {
   // ----- Solve -----
   MPSolver::ResultStatus Solve(const MPSolverParameters& param) override;
   bool InterruptSolve() override;
+  int ComputeIIS(const std::string& filename) override;
 
   // ----- Model modifications and extraction -----
   void Reset() override;
@@ -111,6 +112,10 @@ GLOPInterface::GLOPInterface(MPSolver* const solver)
       interrupt_solver_(false) {}
 
 GLOPInterface::~GLOPInterface() {}
+
+int GLOPInterface::ComputeIIS(const std::string& filename) {
+	return 0;
+}
 
 MPSolver::ResultStatus GLOPInterface::Solve(const MPSolverParameters& param) {
   // Re-extract the problem from scratch. We don't support modifying the

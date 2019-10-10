@@ -22,6 +22,10 @@ extern "C" {
 #include "gurobi_c.h"
 }
 
+extern "C" {
+	int __stdcall GRBisqp(GRBenv**, const char*, const char*, const char*, int, const char*);
+}
+
 namespace operations_research {
 util::Status LoadGurobiEnvironment(GRBenv** env);
 }

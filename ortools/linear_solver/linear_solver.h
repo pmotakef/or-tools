@@ -418,6 +418,8 @@ class MPSolver {
   /// Solves the problem using the specified parameter values.
   ResultStatus Solve(const MPSolverParameters& param);
 
+  int ComputeIIS(const std::string& file_name);
+
   /**
    * Writes the model using the solver internal write function.  Currently only
    * available for Gurobi.
@@ -1477,6 +1479,7 @@ class MPSolverInterface {
   // Solves problem with specified parameter values. Returns true if the
   // solution is optimal.
   virtual MPSolver::ResultStatus Solve(const MPSolverParameters& param) = 0;
+  virtual int ComputeIIS(const std::string& filename) = 0;
 
   // Directly solves a MPModelRequest, bypassing the MPSolver data structures
   // entirely. Returns {} (eg. absl::nullopt) if the feature is not supported by
